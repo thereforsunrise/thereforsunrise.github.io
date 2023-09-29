@@ -2,4 +2,6 @@
 title: There for Sunrise
 ---
 
-![](https://i.ibb.co/1djw6Yb/pixil-frame-0.png)
+<!-- [![sea](assets/images/sea-tiny.png)](about.html) -->
+
+# There for Sunrise
