@@ -44,7 +44,7 @@ def generate_html_file_from_markdown(markdown_file)
 end
 
 def generate_log
-  log_file_slices = Dir.glob("log/*.md").sort.reverse.each_slice(3)
+  log_file_slices = Dir.glob("log/*.md").select { |file| file =~ /^log\/\d{4}-\d{2}-\d{2}\.md$/ }.sort.reverse.each_slice(3)
 
   log_file_slices.each_with_index do |slice, index|
     is_first_iteration = index == 0
