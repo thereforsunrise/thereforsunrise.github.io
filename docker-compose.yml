@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  mysite:
+    container_name: mysite
+    image: ruby:2.6.9
+    volumes:
+      - ./:/app
+    working_dir: /app
+    user: ${CURRENT_UID}
+    environment:
+      HOME: /app
+  web:
+    container_name: mysite-web
+    image: nginx
+    volumes:
+      - ./:/usr/share/nginx/html:ro
+    ports:
+      - 5555:80
