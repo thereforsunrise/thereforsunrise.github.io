@@ -1,3 +1,4 @@
+/* Base styles for all screen sizes */
 body {
   max-width: 34em;
   margin: auto;
@@ -46,4 +47,16 @@ h3 {
 
 h4 {
   color: #8a1253;
+}
+
+/* Mobile-friendly styles */
+@media screen and (max-width: 768px) {
+  body {
+    padding: 0.5em;
+  }
+
+  .center-container {
+    height: auto;
+    padding: 1em;
+  }
 }
