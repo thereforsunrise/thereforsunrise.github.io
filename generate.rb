@@ -70,13 +70,13 @@ EOF
 
       unless is_last_iteration
         f.write <<EOF
-[Previous](log_#{index+1}.html)
+[Previous](log/#{index+1}.html)
 EOF
       end
 
       unless is_first_iteration
         f.write <<EOF
-[Next](log_#{index-1}.html)
+[Next](log/#{index-1}.html)
 EOF
       end
     end
