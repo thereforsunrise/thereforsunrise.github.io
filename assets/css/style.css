@@ -1,17 +1,12 @@
-/* Base styles for all screen sizes */
 body {
   max-width: 34em;
   margin: auto;
   padding: 1em;
   font-family: sans-serif;
-  font-size: 16px; /* Increase the base font size for better mobile readability */
-  line-height: 1.5; /* Increase line height for better readability */
 }
 
 img {
   border: 1px solid;
-  max-width: 100%; /* Ensure images are responsive */
-  height: auto;
 }
 
 .footer {
@@ -20,55 +15,35 @@ img {
   bottom: 0;
   text-align: center;
   width: 100%;
-  padding: 1em; /* Add some padding for better spacing on mobile */
 }
 
 .center-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column; /* Stack child elements vertically on mobile */
-  align-items: center; /* Center child elements horizontally on mobile */
-  padding: 1em; /* Add some padding for better spacing on mobile */
+  height: 100vh;
 }
 
 .center-container img {
   max-width: 100%;
-  height: auto;
+  max-height: 100%;
+  justify-content: center;
+  text-align: justify;
 }
 
 a {
   color: #fda403;
-  text-decoration: none; /* Remove underlines on links for cleaner look */
 }
 
 h1 {
   color: #fda403;
-  font-size: 24px; /* Increase the font size for headings on mobile */
 }
 
 h2 {
   color: #e8751a;
-  font-size: 20px; /* Increase the font size for headings on mobile */
 }
 
 h3 {
   color: #c51350;
-  font-size: 18px; /* Increase the font size for headings on mobile */
 }
 
 h4 {
   color: #8a1253;
-  font-size: 16px; /* Increase the font size for headings on mobile */
-}
-
-/* Mobile-friendly styles */
-@media screen and (max-width: 768px) {
-  body {
-    padding: 0.5em;
-    font-size: 14px; /* Further increase font size for smaller screens */
-  }
-
-  .footer {
-    padding: 0.5em; /* Reduce footer padding for smaller screens */
-  }
 }
