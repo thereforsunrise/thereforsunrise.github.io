@@ -71,7 +71,7 @@ def generate_log
 
       slice.each do |l|
         content << File.read(l)
-        content << "\n"
+        content << "<br/><br/><br/>\n"
       end
 
       is_first_iteration = index == 0

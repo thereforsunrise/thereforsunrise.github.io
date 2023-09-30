@@ -5,16 +5,12 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-img {
-  border: 1px solid;
+a {
+  color: #888888;
 }
 
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  text-align: center;
-  width: 100%;
+img {
+  border: 1px solid;
 }
 
 .center-container {
@@ -28,35 +24,7 @@ img {
   text-align: justify;
 }
 
-a {
-  color: #fda403;
-}
-
-h1 {
-  color: #fda403;
-}
-
-h2 {
-  color: #e8751a;
-}
-
-h3 {
-  color: #c51350;
-}
-
-h4 {
-  color: #8a1253;
-}
-
-@media screen and (max-width: 768px) {
-  body {
-    padding: 0.5em;
-    font-size: 24pt;
-    background-color: black;
-  }
-
-  .center-container {
-    height: auto;
-    padding: 1em;
-  }
+img {
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
 }
