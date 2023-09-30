@@ -12,6 +12,19 @@ title: %s
 
 # %s"""
 
+MARKDOWN_LOG_TEMPLATE ="""---
+title: %s
+---
+
+# There for Sunrise
+
+## %s
+
+%s
+
+%s %s
+"""
+
 def generate_required_markdown_files_from_magic_links_in_markdown_file(markdown_file)
   markdown_file_contents = File.read(markdown_file)
 
@@ -44,41 +57,32 @@ def generate_html_file_from_markdown(markdown_file)
 end
 
 def generate_log
-  log_file_slices = Dir.glob("log/*.md").select { |file| file =~ /^log\/\d{4}-\d{2}-\d{2}\.md$/ }.sort.reverse.each_slice(3)
+  log_file_slices = Dir.glob("log/*.md")
+                      .select { |file| file =~ /^log\/\d{4}-\d{2}-\d{2}\.md$/ }
+                      .sort
+                      .reverse
+                      .each_slice(3)
 
   log_file_slices.each_with_index do |slice, index|
-    is_first_iteration = index == 0
-    is_last_iteration = (index == log_file_slices.to_a.length - 1)
-
     log_file = "log/#{index}.md"
 
     File.open(log_file, "w") do |f|
-      f.write <<EOF
----
-title: Log
----
-
-# There for Sunrise
-
-## Log
-EOF
+      content = ""
 
       slice.each do |l|
-        f.write(File.read(l))
-        f.write("\n")
+        content << File.read(l)
+        content << "\n"
       end
 
-      unless is_last_iteration
-        f.write <<EOF
-[Previous](/log/#{index+1}.html)
-EOF
-      end
+      is_first_iteration = index == 0
+      is_last_iteration = (index == log_file_slices.to_a.length - 1)
 
-      unless is_first_iteration
-        f.write <<EOF
-[Next](/log/#{index-1}.html)
-EOF
-      end
+      previous_link = !is_last_iteration ? "[Previous](/log/#{index+1}.html)" : ""
+      next_link = !is_first_iteration ? "[Next](/log/#{index-1}.html)" : ""
+
+      STDERR.puts "Generating #{log_file}..."
+
+      f.write(MARKDOWN_LOG_TEMPLATE % ["Log", "Log", content, previous_link, next_link])
     end
 
     generate_html_file_from_markdown log_file
@@ -93,7 +97,7 @@ def html_files
   Dir.glob("*.html")
 end
 
-puts "Generating site..."
+STDERR.puts "Generating site..."
 
 markdown_files.each do |markdown_file|
   generate_required_markdown_files_from_magic_links_in_markdown_file markdown_file

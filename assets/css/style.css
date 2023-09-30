@@ -2,7 +2,7 @@ body {
   max-width: 34em;
   margin: auto;
   padding: 1em;
-  font-family: sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 img {
@@ -46,4 +46,17 @@ h3 {
 
 h4 {
   color: #8a1253;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    padding: 0.5em;
+    font-size: 24pt;
+    background-color: black;
+  }
+
+  .center-container {
+    height: auto;
+    padding: 1em;
+  }
 }
