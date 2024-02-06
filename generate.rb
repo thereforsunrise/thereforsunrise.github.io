@@ -70,8 +70,9 @@ def generate_log
       content = ""
 
       slice.each do |l|
+        content << "### #{l.gsub('.md', '').gsub('log/', '')}\n\n"
         content << File.read(l)
-        content << "<br/><br/><br/>\n"
+        content << "<br/><br/>\n"
       end
 
       is_first_iteration = index == 0
