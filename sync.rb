@@ -2,10 +2,10 @@
 
 require 'fileutils'
 
-script_dir = File.dirname(__FILE__)
+SCRIPT_DIR = File.expand_path(File.dirname(__FILE__)) 
 
 source_dir = ARGV[0]
-dest_dir = File.join(script_dir, "log")
+dest_dir = File.join(SCRIPT_DIR, "log")
 
 Dir.glob(File.join(source_dir, '**/*.txt')).each do |file_path|
   next if file_path[/conflicted/]

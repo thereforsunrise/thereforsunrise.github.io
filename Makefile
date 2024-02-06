@@ -24,7 +24,7 @@ shell-web: FORCE
 
 up: FORCE
 	@docker-compose down
-	@docker-compose up -d
+	@docker-compose up --build -d
 
 link: FORCE
 	@echo "http://localhost:5555"
@@ -32,7 +32,7 @@ link: FORCE
 preview: up link
 
 sync: FORCE
-	@$(dc_mysite) bundle exec ruby ./sync.rb /sync
+	@$(dc_mysite) bundle exec ruby ./sync.rb /journals 
 
 deploy: generate
 	@git add .

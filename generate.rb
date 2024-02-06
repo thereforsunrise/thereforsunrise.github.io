@@ -25,6 +25,8 @@ title: %s
 %s %s
 """
 
+SCRIPT_DIR = File.expand_path(File.dirname(__FILE__)) 
+
 def generate_required_markdown_files_from_magic_links_in_markdown_file(markdown_file)
   markdown_file_contents = File.read(markdown_file)
 
@@ -61,21 +63,23 @@ def generate_content(file)
 
   return "" if f.empty?
 
+  title = File.basename(file).gsub('.md', '').gsub('log/', '')
+
   content = ""
-  content << "### #{file.gsub('.md', '').gsub('log/', '')}\n\n"
+  content << "### #{title}\n\n"
   content << f
   content << "<br/><br/>\n"
 end
 
 def generate_log
-  log_file_slices = Dir.glob("log/*.md")
-                      .select { |file| file =~ /^log\/\d{4}-\d{2}-\d{2}\.md$/ }
+  log_file_slices = Dir.glob("#{SCRIPT_DIR}/log/*.md")
+                      .select { |file| file =~ /log\/\d{4}-\d{2}-\d{2}\.md$/ }
                       .sort
                       .reverse
                       .each_slice(3)
 
   log_file_slices.each_with_index do |slice, index|
-    log_file = "log/#{index}.md"
+    log_file = "#{SCRIPT_DIR}/log/#{index}.md"
 
     File.open(log_file, "w") do |f|
       slice_content = ""
@@ -122,3 +126,6 @@ generate_log
 html_files.each do |html_file|
 
 end
+
+File.delete("#{SCRIPT_DIR}/log/index.html") if File.exist?("#{SCRIPT_DIR}/log/index.html")
+File.symlink("#{SCRIPT_DIR}/log/0.html", "#{SCRIPT_DIR}/log/index.html")
