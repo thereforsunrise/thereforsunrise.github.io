@@ -6,6 +6,7 @@ services:
     image: ruby:3.3.0
     volumes:
       - ./:/app
+      - $SYNC_DIR:/sync
     working_dir: /app
     user: ${CURRENT_UID}
     environment:
@@ -16,7 +17,6 @@ services:
     volumes:
       - ./:/usr/share/nginx/html:ro
       - ./default.conf:/etc/nginx/conf.d/default.conf:ro
-      - $SYNC_DIR:/sync
     ports:
       - 5555:80
     environment:

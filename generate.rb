@@ -56,6 +56,17 @@ def generate_html_file_from_markdown(markdown_file)
   end
 end
 
+def generate_content(file)
+  f = File.read(file)
+
+  return "" if f.empty?
+
+  content = ""
+  content << "### #{file.gsub('.md', '').gsub('log/', '')}\n\n"
+  content << f
+  content << "<br/><br/>\n"
+end
+
 def generate_log
   log_file_slices = Dir.glob("log/*.md")
                       .select { |file| file =~ /^log\/\d{4}-\d{2}-\d{2}\.md$/ }
@@ -67,12 +78,10 @@ def generate_log
     log_file = "log/#{index}.md"
 
     File.open(log_file, "w") do |f|
-      content = ""
+      slice_content = ""
 
       slice.each do |l|
-        content << "### #{l.gsub('.md', '').gsub('log/', '')}\n\n"
-        content << File.read(l)
-        content << "<br/><br/>\n"
+        slice_content << generate_content(l)
       end
 
       is_first_iteration = index == 0
@@ -83,7 +92,7 @@ def generate_log
 
       STDERR.puts "Generating #{log_file}..."
 
-      f.write(MARKDOWN_LOG_TEMPLATE % ["Log", "Log", content, previous_link, next_link])
+      f.write(MARKDOWN_LOG_TEMPLATE % ["Log", "Log", slice_content, previous_link, next_link])
     end
 
     generate_html_file_from_markdown log_file
